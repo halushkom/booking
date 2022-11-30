@@ -57,6 +57,7 @@ class MainApplication {
 
 
     public listen() {
+        notificationService()
         this.app.listen(process.env.PORT, () => {
             console.log(`MainApplication listening on the port ${process.env.PORT}`);
         }).keepAliveTimeout = 2 * 60 * 1000;
@@ -74,7 +75,6 @@ class MainApplication {
         this.app.use(multer({ storage: this.storage, fileFilter: this.imageFilter }).fields([
             { name: "photo_avatar", maxCount: 1 },
         ]))
-        this.app.use(notificationService())
         //this.app.use(JWTMiddleware.jwtHandler)
     }
 

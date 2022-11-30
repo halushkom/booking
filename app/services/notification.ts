@@ -19,6 +19,7 @@ export function notificationService(): void {
             for (const appointment of appointments) {
                 const doctorInfo = await Doctor.findOne({ id: appointment.doctor });
                 if (moment(appointment.date).diff(moment(nowDate), 'days') === 1 ) {
+                    // @ts-ignore
                     const message = `${nowDate.toISOString()} | Hello, ${patient.name}! Remember, you have an appointment to ${doctorInfo.spec} tomorrow in ${appointment.date.toISOString()}!`;
                     fs.writeFile('/downloads/notification.log', message, (err) => {
                         if (err) {
@@ -29,6 +30,7 @@ export function notificationService(): void {
                     continue;
                 }
                 if (moment(appointment.date).diff(moment(nowDate), 'hours') === 2 ) {
+                    // @ts-ignore
                     const message = `${nowDate.toISOString()} | Hello, ${patient.name}! Remember, you have an appointment to ${doctorInfo.spec} in 2 hours: ${appointment.date.toISOString()}!`;
                     fs.writeFile('/downloads/notification.log', message, (err) => {
                         if (err) {

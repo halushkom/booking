@@ -26,7 +26,9 @@ class AppointmentController extends Controller {
                 } else {
                     const filteredAppointmentList = appointmentList.filter(item => item.data >= new Date()  )
                     const appointmentsToDelete = appointmentList.filter(item => item.data <= new Date()  )
-                    appointmentsToDelete.forEach(element=> await Appointment.deleteOne({_id: element._id}))
+                    for (let element of appointmentsToDelete) {
+                        await Appointment.deleteOne({_id: element._id})
+                    }
                     res.status(200).send(appointmentList)
                 }
             } catch (e) {
